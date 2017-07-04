@@ -5,35 +5,25 @@ import { onTodoSubmit } from '../../actions';
 import Header from './Header';
 import AddTodo from './AddTodo';
 
-import './index.css'
+import './index.css';
 
 class Todo extends Component {
-
   render() {
-    
-  	const { todos } = this.props;
-    
+    const { todos } = this.props;
+
     return (
       <div className="wrapper">
         <Header />
         <AddTodo onTodoSubmit={this.props.onTodoSubmit} />
-      	<TodoList todos={todos}/>
+        <TodoList todos={todos} />
       </div>
     );
   }
-
-
 }
 
-const selected = state => {
+const selected = state => ({
+  todos: state.Todo,
+});
 
-	return {
-
-		todos:state.Todo
-
-	}
-}
-
-export default connect (selected,{onTodoSubmit})(Todo)
-//export default connect (selected,{})(Todo)
-
+export default connect(selected, { onTodoSubmit })(Todo);
+// export default connect (selected,{})(Todo)

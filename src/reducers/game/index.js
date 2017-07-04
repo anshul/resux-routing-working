@@ -14,7 +14,7 @@ const playerReducer = (state = {}, action) => {
     case types.MARK_CELL:
       return { ...state, isActive: !state.isActive };
     case types.ADD_PLAYERS:
-        return { ...state, playerId: action.payload.playerNewId, playerName: action.payload.name };
+      return { ...state, playerId: action.payload.playerNewId, playerName: action.payload.name };
     default:
       return state;
   }
@@ -31,7 +31,7 @@ const cellMarker = (state = {}, action) => {
   }
 };
 
-export default function(state = initialState, action){
+export default function(state = initialState, action) {
   switch (action.type) {
     case types.MARK_CELL: {
       let activeGameMarker = '';
@@ -47,9 +47,7 @@ export default function(state = initialState, action){
       };
     }
 
-    
-
     default:
       return state;
   }
-};
+}

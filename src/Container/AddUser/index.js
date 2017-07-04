@@ -58,7 +58,7 @@ class AddUser extends React.PureComponent {
 
   handleAddUser = () => {
     const value = this.form.getValue();
-   
+
     if (value) {
       const data = {
         playerName: value.playerName,
@@ -68,7 +68,6 @@ class AddUser extends React.PureComponent {
 
       console.log(data);
 
-      
       this.props.addUsers(data);
     }
   };
@@ -77,13 +76,7 @@ class AddUser extends React.PureComponent {
     return (
       <div>
         <h1>Add User Form</h1>
-        <Form
-          ref={form => (this.form = form)}
-          type={newUser}
-          options={options}
-          value={this.state.value}
-          onChange={this.onChange}
-        />
+        <Form ref={form => (this.form = form)} type={newUser} options={options} value={this.state.value} onChange={this.onChange} />
         <button onClick={this.handleAddUser}>Add User</button>
       </div>
     );
@@ -91,10 +84,8 @@ class AddUser extends React.PureComponent {
 }
 
 AddUser.propTypes = {
-  
   addUsers: PropTypes.func.isRequired,
 };
-
 
 const selector = state => ({});
 

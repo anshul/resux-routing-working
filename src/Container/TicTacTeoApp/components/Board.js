@@ -7,8 +7,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
 class Board extends Component {
-
-  makeYourMove (rowValue, columnValue, xo) {
+  makeYourMove(rowValue, columnValue, xo) {
     !this.props.won && this.props.makeYourMove(rowValue, columnValue, xo);
   }
 
@@ -24,21 +23,12 @@ class Board extends Component {
 
   render() {
     return (
-      <div className='board'>
-        {
-          Object.keys(this.props.board)
-            .map(rowValue => {
-              return (
-                <div className='row' key={rowValue}>
-                  {
-                    this.props.board[rowValue].map((xo, columnValue) => {
-                      return this.getXO(rowValue, columnValue, xo);
-                    })
-                  }
-                </div>
-              );
-            })
-        }
+      <div className="board">
+        {Object.keys(this.props.board).map(rowValue =>
+          <div className="row" key={rowValue}>
+            {this.props.board[rowValue].map((xo, columnValue) => this.getXO(rowValue, columnValue, xo))}
+          </div>,
+        )}
       </div>
     );
   }
@@ -48,17 +38,18 @@ Board.propTypes = {
   turn: PropTypes.string.isRequired,
   won: PropTypes.string,
   draw: PropTypes.bool.isRequired,
-  makeYourMove: PropTypes.func.isRequired
+  makeYourMove: PropTypes.func.isRequired,
 };
 export default connect(
-  ({board, turn, won, draw}) => ({
-    board, turn, won, draw
+  ({ board, turn, won, draw }) => ({
+    board,
+    turn,
+    won,
+    draw,
   }),
-  (dispatch) => {
-    return {
-      makeYourMove (rowValue, columnValue, xo) {
-        dispatch(makeYourMove(rowValue, columnValue, xo));
-      }
-    };
-  }
+  dispatch => ({
+    makeYourMove(rowValue, columnValue, xo) {
+      dispatch(makeYourMove(rowValue, columnValue, xo));
+    },
+  }),
 )(Board);

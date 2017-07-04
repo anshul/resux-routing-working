@@ -1,3 +1,3 @@
 export const resetGame = () => ({
-  type: 'RESET_BOARD'
+  type: 'RESET_BOARD',
 });

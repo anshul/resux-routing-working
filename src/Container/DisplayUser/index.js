@@ -14,9 +14,9 @@ class DisplayUser extends React.PureComponent {
         <h1>Users Info</h1>
         {this.props.Users.map((user, index) =>
           <div key={user.Name}>
-            <p>{`User's Name is:`}{user.Name}</p>
-            <p>{`User's Age is: `}{user.Age}</p>
-            <p>{`User's City is: `}{user.City}</p>
+            <p>{"User's Name is:"}{user.Name}</p>
+            <p>{"User's Age is: "}{user.Age}</p>
+            <p>{"User's City is: "}{user.City}</p>
           </div>,
         )}
       </parent>

@@ -2,11 +2,11 @@ export const initialState = {
   board: {
     0: ['', '', ''],
     1: ['', '', ''],
-    2: ['', '', '']
+    2: ['', '', ''],
   },
   won: undefined,
   draw: false,
-  turn: 'o'
+  turn: 'o',
 };
 const XOInRow = (xo, row) => row.filter(el => el === xo).length;
 const XOInColumn = (xo, colNumber, ...rows) => rows.map(row => row[colNumber]).filter(el => el === xo).length;
@@ -25,24 +25,21 @@ const hasRightSlideCleared = (xo, ...rows) => XOInRightSlide(xo, ...rows) === 3;
 const calculateWinner = (xo, board) => {
   const rows = Object.keys(board).map(row => board[row]);
   return [
-    { won: hasRowCleared(xo, board[0])},
-    { won: hasRowCleared(xo, board[1])},
-    { won: hasRowCleared(xo, board[2])},
-    { won: hasColumnCleared(xo, 0, ...rows)},
-    { won: hasColumnCleared(xo, 1, ...rows)},
-    { won: hasColumnCleared(xo, 2, ...rows)},
-    { won: hasLeftSlideCleared(xo, ...rows)},
-    { won: hasRightSlideCleared(xo, ...rows)}
-  ]
-  .reduce((answer, nextCheck) => {
-    return nextCheck.won ? nextCheck : answer;
-  }, {won: false});
+    { won: hasRowCleared(xo, board[0]) },
+    { won: hasRowCleared(xo, board[1]) },
+    { won: hasRowCleared(xo, board[2]) },
+    { won: hasColumnCleared(xo, 0, ...rows) },
+    { won: hasColumnCleared(xo, 1, ...rows) },
+    { won: hasColumnCleared(xo, 2, ...rows) },
+    { won: hasLeftSlideCleared(xo, ...rows) },
+    { won: hasRightSlideCleared(xo, ...rows) },
+  ].reduce((answer, nextCheck) => (nextCheck.won ? nextCheck : answer), { won: false });
 };
 export const rootReducer = (state, action) => {
   switch (action.type) {
     case 'MARK_MOVE':
-      const {xo, row, columnValue} = action;
-      const nextState = {...state};
+      const { xo, row, columnValue } = action;
+      const nextState = { ...state };
       nextState.board[row][columnValue] = xo;
       const xResult = calculateWinner('x', nextState.board);
       const oResult = calculateWinner('o', nextState.board);
@@ -55,19 +52,13 @@ export const rootReducer = (state, action) => {
       if (!nextState.won) {
         nextState.turn = nextState.turn === 'o' ? 'x' : 'o';
       }
-      const boardIsFull = [
-        ...nextState.board[0],
-        ...nextState.board[1],
-        ...nextState.board[2]
-      ]
-        .filter(xo => xo !== '')
-        .length === 9;
+      const boardIsFull = [...nextState.board[0], ...nextState.board[1], ...nextState.board[2]].filter(xo => xo !== '').length === 9;
 
       if (boardIsFull && !nextState.won) {
         nextState.draw = true;
       }
       return nextState;
-       case 'RESET_BOARD':
+    case 'RESET_BOARD':
       return nextState.assign({}, initialState);
     default:
       return state;
