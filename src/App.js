@@ -16,7 +16,6 @@ const App = () =>
         <div style={{ display: 'flex' }}>
           <Sidebar />
           <Switch>
-            flex-direction :row
             <Route path="/todo" exact component={TodoApp} />
             <Route path="/game" exact component={TicTacToe} />
             <Route path="/addUser" exact component={AddUser} />

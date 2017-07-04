@@ -30,7 +30,7 @@ class Sidebar extends React.PureComponent {
             <Link to={'/todo'}>Todo List</Link>
           </li>
           <li>
-            <Link to={'/tictacteo'}>Tic Tac Teo</Link>
+            <Link to={'/game'}>Tic Tac Teo</Link>
           </li>
           <li>
             <Link to={'/addUser'}>Add Users</Link>
@@ -45,7 +45,7 @@ class Sidebar extends React.PureComponent {
   }
 }
 
-Sidebar.PropTypes = {
+Sidebar.propTypes = {
   title: PropTypes.string.isRequired,
 };
 

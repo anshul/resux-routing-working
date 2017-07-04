@@ -1,4 +1,5 @@
 import types from '../../action_types';
+
 const initialState = {
   cells: [
     [{ cellid: 'col1_1', cellValue: '' }, { cellid: 'col1_2', cellValue: '' }, { cellid: 'col1_3', cellValue: '' }],
@@ -22,10 +23,12 @@ const playerReducer = (state = {}, action) => {
 
 const cellMarker = (state = {}, action) => {
   switch (action.type) {
-    case types.MARK_CELL:
+    case types.MARK_CELL: {
       if (state.cellid === action.payload && state.cellValue === '') {
         return { ...state, cellValue: action.activeGameMarker };
       }
+      return state;
+    }
     default:
       return state;
   }
@@ -34,16 +37,11 @@ const cellMarker = (state = {}, action) => {
 export default function(state = initialState, action) {
   switch (action.type) {
     case types.MARK_CELL: {
-      let activeGameMarker = '';
-      state.players.find(player => {
-        if (player.isActive) activeGameMarker = player.gameMarker;
-      });
-      action.activeGameMarker = activeGameMarker;
-
+      const activeGameMarker = (state.palyers.find(pl => pl.isActive) || {}).activeGameMarker || '';
       return {
         ...state,
-        cells: state.cells.map(row => row.map(cell => cellMarker(cell, action))),
-        players: state.players.map(player => playerReducer(player, action)),
+        cells: state.cells.map(row => row.map(cell => cellMarker(cell, { ...action, activeGameMarker }))),
+        players: state.players.map(player => playerReducer(player, { ...action, activeGameMarker })),
       };
     }
 
