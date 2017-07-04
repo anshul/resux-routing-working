@@ -9,7 +9,7 @@ const Form = t.form.Form;
 
 const Age = t.refinement(t.Number, n => n >= 0);
 
-Age.getValidationErrorMessage = (value, path, context) => 'bad age';
+Age.getValidationErrorMessage = (value, path, context) => 'Age should be integer';
 
 const newUser = t.struct({
   playerName: t.String,
