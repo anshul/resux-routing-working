@@ -58,7 +58,7 @@ class AddUser extends React.PureComponent {
 
   handleAddUser = () => {
     const value = this.form.getValue();
-    // If the form is valid...
+   
     if (value) {
       const data = {
         playerName: value.playerName,
@@ -68,32 +68,8 @@ class AddUser extends React.PureComponent {
 
       console.log(data);
 
-      // console.log(this.props.Users);
+      
       this.props.addUsers(data);
-      /*
-      // Serialize and post the data
-      const json = JSON.stringify(data);
-      fetch('http://localhost:3000/users/register', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          Accept: 'application/json'
-        },
-        body: json
-      })
-      .then((response) => response.json())
-      .then(() => {
-        alert('Success! You may now log in.');
-        // Redirect to home screen
-        this.props.navigator.pop();
-      })
-      .catch((error) => {
-        alert('There was an error creating your account.');
-      })
-      .done()
-    } else {
-      // Form validation error
-      alert('Please fix the errors listed and try again.') */
     }
   };
 
@@ -115,11 +91,11 @@ class AddUser extends React.PureComponent {
 }
 
 AddUser.propTypes = {
-  // Users: PropTypes.shape({Users: PropTypes.arrayOf(PropTypes.string)}.isRequired,
+  
   addUsers: PropTypes.func.isRequired,
 };
 
-// const selector = state => ({ Users: state.config.Users });
+
 const selector = state => ({});
 
 export default connect(selector, { addUsers })(AddUser);
